@@ -1,13 +1,16 @@
 package warehouse;
 
-import warehouse.delivery.DeliveryRegister;
-import warehouse.user.UserRegister;
+import warehouse.commands.CommandMessage;
+import warehouse.commands.Commands;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        UserRegister.userRegister();
-        DeliveryRegister.deliveryRegister();
-
-
+        Scanner scanner = new Scanner(System.in);
+        CommandMessage.info();
+        while (true) {
+            Commands.commands(scanner.next());
+        }
     }
 }

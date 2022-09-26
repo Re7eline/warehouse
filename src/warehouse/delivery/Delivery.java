@@ -1,59 +1,43 @@
 package warehouse.delivery;
 
-import warehouse.enums.Destination;
+import warehouse.commands.CommandMessage;
 import warehouse.enums.PackageType;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Delivery {
-    private String destination;
-    private String packageType;
-    private int price;
-    private ArrayList<Integer> deliveryType = new ArrayList<>();
+    private static String packageType;
 
-    public Delivery(Destination destination, PackageType packageType) {
-        this.destination = destination.toString();
+    public Delivery(PackageType packageType) {
         this.packageType = packageType.toString();
-        this.price = packageType.getPackagePrice();
-    }
-    public String getDestination() {
-        return destination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
+    public static void deliveryRegister() {
+        Delivery[] delivery = {
+                new Delivery(PackageType.PLASTICBOX),
+                new Delivery(PackageType.PAPERBOX),
+                new Delivery(PackageType.WOODBOX)};
 
-    public String getPackageType() {
-        return packageType;
-    }
-
-    public void setPackageType(String packageType) {
-        this.packageType = packageType;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public ArrayList<Integer> getDeliveryType() {
-        return deliveryType;
-    }
-
-    public void setDeliveryType(ArrayList<Integer> deliveryType) {
-        this.deliveryType = deliveryType;
-    }
-
-    @Override
-    public String toString() {
-        return "Delivery{" +
-                "destination='" + destination + '\'' +
-                ", packageType='" + packageType + '\'' +
-                ", price=" + price +
-                '}';
+        Scanner scanner = new Scanner(System.in);
+        CommandMessage.newDelivery();
+        System.out.println("Select the type of delivery. Choose 0-3:");
+//        Arrays.stream(delivery).forEach(System.out::println);
+        System.out.println(Arrays.toString(delivery));
+        int check = scanner.nextInt();
+        if (check < 1 || check > 3) {
+            CommandMessage.error();
+        }
+        if (check == 0) {
+            String packageType = PackageType.PLASTICBOX.toString();
+            System.out.println(packageType);
+        } else if (check == 1) {
+            String packageType = PackageType.PAPERBOX.toString();
+            System.out.println(packageType);
+        } else if (check == 2) {
+            String packageType = PackageType.WOODBOX.toString();
+            System.out.println(packageType);
+        }
+        CommandMessage.info();
     }
 }

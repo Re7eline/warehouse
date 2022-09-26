@@ -1,30 +1,55 @@
 package warehouse.user;
 
+import warehouse.commands.CommandMessage;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
-    private String name;
-    private String surname;
-    private int dateOfBirth;
-    private int monthOfBirth;
-    private int yearOfBirth;
+    public static ArrayList<User> registeredUsers = new ArrayList<>(100);
+    private final String name;
+    private final String surname;
+    private final int dateOfBirth;
+    private final int monthOfBirth;
+    private final int yearOfBirth;
     private String eMail;
-    private int mobileNum;
 
-
-    public User(String name, String surname,
-                int dateOfBirth, int monthOfBirth, int yearOfBirth,
-                String eMail, int mobileNum) {
+    public User(String name, String surname, int dateOfBirth, int monthOfBirth, int yearOfBirth, String eMail) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.yearOfBirth = yearOfBirth;
         this.eMail = eMail;
-        this.mobileNum = mobileNum;
     }
 
+    public static User userRegister() {
+        CommandMessage.newUser();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name");
+        String name = scanner.next();
+        System.out.println("Enter your surname");
+        String surname = scanner.next();
+        System.out.println("Enter your day of birth");
+        int dateOfBirth = scanner.nextInt();
+        System.out.println("Enter your month of birth");
+        int monthOfBirth = scanner.nextInt();
+        System.out.println("Enter your year of birth");
+        int yearOfBirth = scanner.nextInt();
+        System.out.println("Enter your eMail");
+        String eMail = scanner.next();
+
+        User user = new User(name, surname,
+                dateOfBirth, monthOfBirth, yearOfBirth,
+                eMail);
+
+
+        registeredUsers.add(user);
+        System.out.println(user);
+
+
+        return user;
+    }
 
     @Override
     public String toString() {
@@ -35,7 +60,6 @@ public class User {
                 ", monthOfBirth=" + monthOfBirth +
                 ", yearOfBirth=" + yearOfBirth +
                 ", eMail='" + eMail + '\'' +
-                ", mobileNum=" + mobileNum +
                 '}';
     }
 
@@ -43,40 +67,20 @@ public class User {
         return name;
     }
 
-    public void setName(String next) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public int getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(int dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public int getMonthOfBirth() {
         return monthOfBirth;
     }
 
-    public void setMonthOfBirth(int monthOfBirth) {
-        this.monthOfBirth = monthOfBirth;
-    }
-
     public int getYearOfBirth() {
         return yearOfBirth;
-    }
-
-    public void setYearOfBirth(int yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
     }
 
     public String geteMail() {
@@ -85,13 +89,5 @@ public class User {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
-    }
-
-    public int getMobileNum() {
-        return mobileNum;
-    }
-
-    public void setMobileNum(int mobileNum) {
-        this.mobileNum = mobileNum;
     }
 }
