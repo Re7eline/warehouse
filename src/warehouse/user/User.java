@@ -1,6 +1,9 @@
 package warehouse.user;
 
 import warehouse.commands.CommandMessage;
+import warehouse.delivery.Delivery;
+import warehouse.enums.Destination;
+import warehouse.enums.PackageType;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,14 +16,23 @@ public class User {
     private final int monthOfBirth;
     private final int yearOfBirth;
     private String eMail;
+    private PackageType packageTypes;
+    private Destination destinations;
 
-    public User(String name, String surname, int dateOfBirth, int monthOfBirth, int yearOfBirth, String eMail) {
+
+    public User(String name, String surname,
+                int dateOfBirth, int monthOfBirth, int yearOfBirth,
+                String eMail,
+                PackageType packageTypes,
+                Destination destinations) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.yearOfBirth = yearOfBirth;
         this.eMail = eMail;
+        this.packageTypes = packageTypes;
+        this.destinations = destinations;
     }
 
     public static User userRegister() {
@@ -41,13 +53,21 @@ public class User {
 
         User user = new User(name, surname,
                 dateOfBirth, monthOfBirth, yearOfBirth,
-                eMail);
+                eMail,
+                Delivery.getPackageTypes().get(Delivery.getCheck()),
+                Delivery.getDestinations().get(Delivery.getI()));
 
         registeredUsers.add(user);
-        System.out.println("Your data: "+user);
-
-
+        System.out.println("Your data: " + user.toString());
         return user;
+    }
+
+    public static ArrayList<User> getRegisteredUsers() {
+        return registeredUsers;
+    }
+
+    public static void setRegisteredUsers(ArrayList<User> registeredUsers) {
+        User.registeredUsers = registeredUsers;
     }
 
     @Override
@@ -59,6 +79,8 @@ public class User {
                 ", monthOfBirth=" + monthOfBirth +
                 ", yearOfBirth=" + yearOfBirth +
                 ", eMail='" + eMail + '\'' +
+                ", packageTypes=" + packageTypes +
+                ", destinations=" + destinations +
                 '}';
     }
 
@@ -90,7 +112,12 @@ public class User {
         this.eMail = eMail;
     }
 
-    public static ArrayList<User> getRegisteredUsers() {
-        return registeredUsers;
+    public PackageType getPackageTypes() {
+        return packageTypes;
     }
+
+    public void setPackageTypes(PackageType packageTypes) {
+        this.packageTypes = packageTypes;
+    }
+
 }

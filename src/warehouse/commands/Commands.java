@@ -10,12 +10,14 @@ public interface Commands {
         if (command.equals("r") || command.equals("i") || command.equals("e")) {
             switch (command) {
                 case "r":
-                    User.userRegister();
                     Delivery.deliveryRegister();
+                    User.userRegister();
                     break;
                 case "i":
-                    System.out.println(getRegisteredUsers()+" Your type of delivery: "+Delivery.getPackageTypes());
-                    CommandMessage.info();
+//                    if (getRegisteredUsers().toString().contains(null)){
+//                        CommandMessage.noData();
+//                    }else
+                    System.out.println("Registered Users: " + getRegisteredUsers());
                     break;
                 case "e":
                     System.out.println("Exiting...");
