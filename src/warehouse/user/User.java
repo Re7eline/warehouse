@@ -1,13 +1,15 @@
 package warehouse.user;
+
+import warehouse.arrays.Arrays;
 import warehouse.commands.CommandMessage;
 import warehouse.delivery.Delivery;
+import warehouse.enums.Colours;
 import warehouse.enums.Destination;
 import warehouse.enums.PackageType;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class User {
-    private static ArrayList<User> registeredUsers = new ArrayList<>();
     private final String name;
     private final String surname;
     private final String dateOfBirth;
@@ -51,25 +53,18 @@ public class User {
         User user = new User(name, surname,
                 dateOfBirth, monthOfBirth, yearOfBirth,
                 eMail,
-                Delivery.getPackageTypes().get(Delivery.getI()),
-                Delivery.getDestinations().get(Delivery.getI()));
+                Arrays.getPackageTypes().get(Delivery.getI()),
+                Arrays.getDestinations().get(Delivery.getI()));
 
-        registeredUsers.add(user);
+        Arrays.getRegisteredUsers().add(user);
         System.out.println("Your data: " + user.toString());
         return user;
     }
 
-    public static ArrayList<User> getRegisteredUsers() {
-        return registeredUsers;
-    }
-
-    public static void setRegisteredUsers(ArrayList<User> registeredUsers) {
-        User.registeredUsers = registeredUsers;
-    }
 
     @Override
     public String toString() {
-        return "\n" + "User{" +
+        return Colours.ANSI_CYAN + "\n" + "User{" +
                 "Name= " + name +
                 ", Surname= " + surname +
                 ", Date of birth= " + dateOfBirth +
@@ -78,7 +73,7 @@ public class User {
                 ", Email= " + eMail +
                 ", Ordered Package Type= " + packageTypes +
                 ", Destination= " + destinations +
-                '}';
+                '}' + Colours.ANSI_RESET;
     }
 
     public String getName() {

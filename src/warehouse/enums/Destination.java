@@ -1,5 +1,5 @@
 package warehouse.enums;
 
 public enum Destination {
-    CITY,REGION,COUNTRY
+    CITY, REGION, COUNTRY
 }

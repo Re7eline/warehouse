@@ -1,9 +1,14 @@
 package warehouse.commands;
+
+import warehouse.arrays.Arrays;
 import warehouse.delivery.Delivery;
+import warehouse.enums.Colours;
 import warehouse.user.User;
+
 import java.util.stream.Stream;
-import static warehouse.user.User.getRegisteredUsers;
-import static warehouse.user.User.userRegister;
+
+import static warehouse.arrays.Arrays.getRegisteredUsers;
+
 
 public interface Commands {
     static void check(String check) {
@@ -11,23 +16,23 @@ public interface Commands {
             switch (check) {
                 case "0":
                     Delivery.setI(0);
-                    Delivery.getPackageTypes().get(Delivery.getI());
-                    Delivery.getDestinations().get(Delivery.getI());
+                    Arrays.getPackageTypes().get(Delivery.getI());
+                    Arrays.getDestinations().get(Delivery.getI());
                     break;
                 case "1":
                     Delivery.setI(1);
-                    Delivery.getPackageTypes().get(Delivery.getI());
-                    Delivery.getDestinations().get(Delivery.getI());
+                    Arrays.getPackageTypes().get(Delivery.getI());
+                    Arrays.getDestinations().get(Delivery.getI());
                     break;
                 case "2":
                     Delivery.setI(2);
-                    Delivery.getPackageTypes().get(Delivery.getI());
-                    Delivery.getDestinations().get(Delivery.getI());
+                    Arrays.getPackageTypes().get(Delivery.getI());
+                    Arrays.getDestinations().get(Delivery.getI());
                     break;
             }
         } else {
             CommandMessage.error();
-            System.out.println("Will be a basic statement");
+
         }
 
     }
@@ -42,11 +47,11 @@ public interface Commands {
                 case "i":
                     if (getRegisteredUsers().isEmpty()) {
                         CommandMessage.noData();
-                    } else  System.out.println("Registered Users: ");
+                    } else System.out.println("Registered Users: ");
                     Stream.of(getRegisteredUsers()).forEach(System.out::println);
                     break;
                 case "e":
-                    System.out.println("Exiting...");
+                    System.out.println(Colours.ANSI_RED +"Exiting...");
                     System.exit(0);
             }
         } else {
