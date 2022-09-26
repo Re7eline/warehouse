@@ -1,10 +1,8 @@
 package warehouse.user;
-
 import warehouse.commands.CommandMessage;
 import warehouse.delivery.Delivery;
 import warehouse.enums.Destination;
 import warehouse.enums.PackageType;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,16 +10,16 @@ public class User {
     private static ArrayList<User> registeredUsers = new ArrayList<>();
     private final String name;
     private final String surname;
-    private final int dateOfBirth;
-    private final int monthOfBirth;
-    private final int yearOfBirth;
+    private final String dateOfBirth;
+    private final String monthOfBirth;
+    private final String yearOfBirth;
     private String eMail;
     private PackageType packageTypes;
     private Destination destinations;
 
 
     public User(String name, String surname,
-                int dateOfBirth, int monthOfBirth, int yearOfBirth,
+                String dateOfBirth, String monthOfBirth, String yearOfBirth,
                 String eMail,
                 PackageType packageTypes,
                 Destination destinations) {
@@ -43,18 +41,17 @@ public class User {
         System.out.println("Enter your surname");
         String surname = scanner.next();
         System.out.println("Enter your day of birth");
-        int dateOfBirth = scanner.nextInt();
+        String dateOfBirth = scanner.next();
         System.out.println("Enter your month of birth");
-        int monthOfBirth = scanner.nextInt();
+        String monthOfBirth = scanner.next();
         System.out.println("Enter your year of birth");
-        int yearOfBirth = scanner.nextInt();
+        String yearOfBirth = scanner.next();
         System.out.println("Enter your eMail");
         String eMail = scanner.next();
-
         User user = new User(name, surname,
                 dateOfBirth, monthOfBirth, yearOfBirth,
                 eMail,
-                Delivery.getPackageTypes().get(Delivery.getCheck()),
+                Delivery.getPackageTypes().get(Delivery.getI()),
                 Delivery.getDestinations().get(Delivery.getI()));
 
         registeredUsers.add(user);
@@ -72,15 +69,15 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", monthOfBirth=" + monthOfBirth +
-                ", yearOfBirth=" + yearOfBirth +
-                ", eMail='" + eMail + '\'' +
-                ", packageTypes=" + packageTypes +
-                ", destinations=" + destinations +
+        return "\n" + "User{" +
+                "Name= " + name +
+                ", Surname= " + surname +
+                ", Date of birth= " + dateOfBirth +
+                "." + monthOfBirth +
+                "." + yearOfBirth +
+                ", Email= " + eMail +
+                ", Ordered Package Type= " + packageTypes +
+                ", Destination= " + destinations +
                 '}';
     }
 
@@ -92,15 +89,15 @@ public class User {
         return surname;
     }
 
-    public int getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public int getMonthOfBirth() {
+    public String getMonthOfBirth() {
         return monthOfBirth;
     }
 
-    public int getYearOfBirth() {
+    public String getYearOfBirth() {
         return yearOfBirth;
     }
 
