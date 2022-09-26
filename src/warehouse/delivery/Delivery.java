@@ -3,41 +3,51 @@ package warehouse.delivery;
 import warehouse.commands.CommandMessage;
 import warehouse.enums.PackageType;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import static warehouse.enums.PackageType.*;
+
 public class Delivery {
-    private static String packageType;
-
-    public Delivery(PackageType packageType) {
-        this.packageType = packageType.toString();
-    }
-
+    private static int i;
+    private static ArrayList<PackageType> packageTypes = new ArrayList<>(3);
     public static void deliveryRegister() {
-        Delivery[] delivery = {
-                new Delivery(PackageType.PLASTICBOX),
-                new Delivery(PackageType.PAPERBOX),
-                new Delivery(PackageType.WOODBOX)};
+
+        packageTypes.add(0, PLASTICBOX);
+        packageTypes.add(1, PAPERBOX);
+        packageTypes.add(2, WOODBOX);
 
         Scanner scanner = new Scanner(System.in);
         CommandMessage.newDelivery();
-        System.out.println("Select the type of delivery. Choose 0-3:");
-//        Arrays.stream(delivery).forEach(System.out::println);
-        System.out.println(Arrays.toString(delivery));
+        System.out.println("Select the type of delivery. Choose 0-2:");
+        System.out.println(packageTypes);
+
         int check = scanner.nextInt();
-        if (check < 1 || check > 3) {
+        if (check > 0 || check < 2) {
+
+            if (check == 0) {
+                i = 0;
+                packageTypes.get(i);
+            } else if (check == 1) {
+                i=1;
+                packageTypes.get(i);
+            } else if (check == 2) {
+                i=2;
+                packageTypes.get(i);
+            }
+        } else {
             CommandMessage.error();
+            return;
         }
-        if (check == 0) {
-            String packageType = PackageType.PLASTICBOX.toString();
-            System.out.println(packageType);
-        } else if (check == 1) {
-            String packageType = PackageType.PAPERBOX.toString();
-            System.out.println(packageType);
-        } else if (check == 2) {
-            String packageType = PackageType.WOODBOX.toString();
-            System.out.println(packageType);
-        }
+        System.out.println("You've ordered: " + packageTypes.get(i));
         CommandMessage.info();
+    }
+
+    public static ArrayList<PackageType> getPackageTypes() {
+        return packageTypes;
+    }
+
+    public static int getI() {
+        return i;
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
-    public static ArrayList<User> registeredUsers = new ArrayList<>(100);
+    private static ArrayList<User> registeredUsers = new ArrayList<>();
     private final String name;
     private final String surname;
     private final int dateOfBirth;
@@ -43,9 +43,8 @@ public class User {
                 dateOfBirth, monthOfBirth, yearOfBirth,
                 eMail);
 
-
         registeredUsers.add(user);
-        System.out.println(user);
+        System.out.println("Your data: "+user);
 
 
         return user;
@@ -89,5 +88,9 @@ public class User {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public static ArrayList<User> getRegisteredUsers() {
+        return registeredUsers;
     }
 }
